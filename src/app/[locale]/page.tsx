@@ -57,9 +57,9 @@ const CALCULATOR_ICONS = [
 ];
 
 const CALCULATOR_CONFIGS = [
-  { titleKey: 'home.compoundInterestTitle', descKey: 'home.compoundInterestDescription', href: '/compound-interest-calculator' as const, iconIndex: 0 },
-  { titleKey: 'home.investmentGrowthTitle', descKey: 'home.investmentGrowthDescription', href: '/investment-growth-calculator' as const, iconIndex: 1 },
   { titleKey: 'home.retirementTitle', descKey: 'home.retirementDescription', href: '/retirement-calculator' as const, iconIndex: 2 },
+  { titleKey: 'home.investmentGrowthTitle', descKey: 'home.investmentGrowthDescription', href: '/investment-growth-calculator' as const, iconIndex: 1 },
+  { titleKey: 'home.compoundInterestTitle', descKey: 'home.compoundInterestDescription', href: '/compound-interest-calculator' as const, iconIndex: 0 },
 ];
 
 export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {

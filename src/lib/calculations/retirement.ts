@@ -78,6 +78,21 @@ export function calculateRetirement(inputs: RetirementInputs): RetirementResult 
     }
   }
 
+  // FIRE Number calculation
+  let fireNumber: number | null = null;
+  let fireProgress: number | null = null;
+  const withdrawalRate = clampNumber(inputs.withdrawalRate, 1, 10);
+
+  if (inputs.annualExpenses !== null && inputs.annualExpenses > 0) {
+    fireNumber = roundToCents(inputs.annualExpenses / (withdrawalRate / 100));
+    fireProgress = Math.min(100, (estimatedBalance / fireNumber) * 100);
+  }
+
+  // Monthly retirement income (based on withdrawal rate)
+  const monthlyRetirementIncome = roundToCents(
+    (estimatedBalance * (withdrawalRate / 100)) / 12,
+  );
+
   return {
     estimatedBalance,
     totalContributions,
@@ -86,5 +101,8 @@ export function calculateRetirement(inputs: RetirementInputs): RetirementResult 
     gap,
     requiredAdditionalMonthly,
     readiness,
+    fireNumber,
+    monthlyRetirementIncome,
+    fireProgress,
   };
 }

@@ -34,6 +34,7 @@ export const investmentGrowthParsers = {
     'annually',
   ]).withDefault(igDefaults.compoundFrequency.default),
   target: parseAsFloat,
+  fees: parseAsFloat.withDefault(igDefaults.expenseRatio.default),
 };
 
 // ─── Retirement ─────────────────────────────────────────
@@ -45,4 +46,6 @@ export const retirementParsers = {
   monthly: parseAsFloat.withDefault(retDefaults.monthlyContribution.default),
   return: parseAsFloat.withDefault(retDefaults.annualReturn.default),
   goal: parseAsFloat,
+  expenses: parseAsFloat,
+  wr: parseAsFloat.withDefault(retDefaults.withdrawalRate.default),
 };

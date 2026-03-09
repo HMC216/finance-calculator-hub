@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useCompoundInterestCalculator } from '@/hooks/useCalculator.ts';
 import { CALCULATOR_LIMITS } from '@/lib/constants.ts';
 import type { CompoundFrequency } from '@/lib/calculations/types.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
+import { currencyConfig } from '@/lib/currency/config.ts';
 import InputField from '@/components/ui/InputField.tsx';
 import ResultCard from '@/components/ui/ResultCard.tsx';
 import GrowthChart from '@/components/ui/GrowthChart.tsx';
@@ -15,6 +17,8 @@ const limits = CALCULATOR_LIMITS.compoundInterest;
 
 export default function CompoundInterestCalculator() {
   const t = useTranslations();
+  const { currency } = useCurrency();
+  const currencySymbol = currencyConfig[currency].symbol;
   const { inputs, setInputs, result, interpretations } =
     useCompoundInterestCalculator();
 
@@ -40,7 +44,7 @@ export default function CompoundInterestCalculator() {
             min={limits.initialAmount.min}
             max={limits.initialAmount.max}
             step={limits.initialAmount.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.initialInvestment')}
             showSlider={true}
           />
@@ -52,7 +56,7 @@ export default function CompoundInterestCalculator() {
             min={limits.monthlyContribution.min}
             max={limits.monthlyContribution.max}
             step={limits.monthlyContribution.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.monthlyContribution')}
             showSlider={true}
           />

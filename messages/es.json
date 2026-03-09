@@ -15,7 +15,8 @@
     "lastUpdated": "Última actualización: 1 de enero de 2025",
     "contact": "Contacto",
     "contactText": "Si tiene preguntas sobre este {document}, contáctenos en",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "Seleccionar moneda"
   },
   "nav": {
     "compoundInterest": "Interés Compuesto",
@@ -52,6 +53,9 @@
     "retirementAge": "Edad de jubilación",
     "currentSavings": "Ahorros actuales",
     "desiredRetirementFund": "Fondo de jubilación deseado (opcional)",
+    "annualExpenses": "Gastos anuales (opcional)",
+    "withdrawalRate": "Tasa de retiro",
+    "expenseRatio": "Ratio de gastos (comisión anual)",
     "monthly": "Mensual",
     "quarterly": "Trimestral",
     "annually": "Anual",
@@ -69,7 +73,10 @@
     "currentSavings": "Cuánto has ahorrado para la jubilación hasta ahora.",
     "monthlyContributionRetirement": "Cuánto planeas ahorrar cada mes.",
     "annualReturnRetirement": "Tasa de rendimiento anual esperada de tus inversiones.",
-    "desiredRetirementFund": "Tu objetivo de ahorro para la jubilación. Déjalo en 0 si no estás seguro."
+    "desiredRetirementFund": "Tu objetivo de ahorro para la jubilación. Déjalo en 0 si no estás seguro.",
+    "annualExpenses": "Sus gastos anuales estimados en la jubilación. Se usa para calcular su Número FIRE.",
+    "withdrawalRate": "El porcentaje de ahorros que planea retirar anualmente. La regla del 4% es una guía común.",
+    "expenseRatio": "La comisión anual cobrada por los fondos de inversión. Incluso comisiones pequeñas se acumulan con el tiempo."
   },
   "results": {
     "finalBalance": "Saldo final",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count} {count, plural, one {año} other {años}}",
     "scenarioGrowthComparison": "Comparación de crecimiento por escenarios",
     "savingsGrowthByAge": "Crecimiento del ahorro por edad",
-    "resultInterpretation": "Interpretación de resultados"
+    "resultInterpretation": "Interpretación de resultados",
+    "monthlyRetirementIncome": "Ingreso mensual de jubilación",
+    "feeImpactTitle": "Análisis de impacto de comisiones",
+    "withoutFees": "Sin comisiones",
+    "withFees": "Con comisión del {rate}%",
+    "totalFeesLost": "Costo total de comisiones"
   },
   "table": {
     "year": "Año",
@@ -120,7 +132,11 @@
     "noTargetDescription": "Establece un fondo de jubilación deseado para ver tu evaluación de preparación.",
     "readinessAriaLabel": "Preparación para la jubilación: {status}",
     "gap": "Brecha: {amount}",
-    "saveMore": "Ahorra {amount}/mes más para cerrar la brecha."
+    "saveMore": "Ahorra {amount}/mes más para cerrar la brecha.",
+    "fireNumber": "Número FIRE",
+    "fireTargetLabel": "con tasa de retiro del {rate}%",
+    "fireProgress": "Progreso FIRE",
+    "fireGap": "Necesita {amount} más para alcanzar su número FIRE."
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "La diferencia entre el escenario conservador ({conservativeRate}%) y el agresivo ({aggressiveRate}%) es de {spread}, con un rango de {conservativeTotal} a {aggressiveTotal}.",
       "targetReached": "Alcanzarás tu objetivo de {target} en {time} a la tasa base.",
       "targetRequiresMore": "Para alcanzar tu objetivo de {target} en {years} años, necesitas aportar {requiredMonthly}/mes.",
-      "targetWithinReach": "Tu objetivo de {target} ya está al alcance con tus aportaciones actuales."
+      "targetWithinReach": "Tu objetivo de {target} ya está al alcance con tus aportaciones actuales.",
+      "feeImpact": "Un ratio de gastos del {expenseRatio}% le cuesta {totalFeesLost} durante el período de inversión. Sin comisiones: {balanceWithoutFees}. Con comisiones: {balanceWithFees}."
     },
     "ret": {
       "mainSummary": "A los {retirementAge} años, tendrás aproximadamente {balance} ahorrados para la jubilación.",
@@ -142,7 +159,9 @@
       "close": "Estás cerca de tu objetivo de {goal}, con una brecha de {gap}. Un pequeño ajuste puede cerrar la diferencia.",
       "behind": "Estás por debajo de tu objetivo de {goal} en {gap}. Considera aumentar tus aportaciones o ajustar tu horizonte temporal.",
       "noTarget": "Establece un objetivo de jubilación para ver cómo se comparan tus ahorros y recibir orientación personalizada.",
-      "gapClosing": "Aportar {additionalMonthly} más al mes cierra la brecha antes de la jubilación."
+      "gapClosing": "Aportar {additionalMonthly} más al mes cierra la brecha antes de la jubilación.",
+      "fireNumber": "Su Número FIRE es {fireNumber} basado en una tasa de retiro del {withdrawalRate}%. Ha alcanzado el {progress}%.",
+      "monthlyIncome": "Con una tasa de retiro del {withdrawalRate}%, su ingreso mensual estimado de jubilación sería {monthlyIncome}."
     }
   },
   "seo": {

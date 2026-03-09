@@ -83,20 +83,24 @@ export default async function RetirementCalculatorPage({ params }: { params: Pro
         <RetirementCalculator />
       </Suspense>
 
-      {/* How It Works Section */}
+      {/* How It Works Section — collapsed by default */}
       <section className="mt-16" aria-labelledby="how-it-works-heading">
-        <h2
-          id="how-it-works-heading"
-          className="mb-4 text-2xl font-bold text-gray-900"
-        >
-          {t('howItWorks.retirement.heading')}
-        </h2>
-        <div className="prose prose-gray max-w-none text-gray-700">
-          <p>{t('howItWorks.retirement.p1')}</p>
-          <p>{t('howItWorks.retirement.p2')}</p>
-          <p>{t('howItWorks.retirement.p3')}</p>
-          <p>{t('howItWorks.retirement.p4')}</p>
-        </div>
+        <details className="group rounded-xl border border-gray-200 bg-white">
+          <summary className="flex cursor-pointer items-center justify-between px-6 py-4">
+            <h2 id="how-it-works-heading" className="text-2xl font-bold text-gray-900">
+              {t('howItWorks.retirement.heading')}
+            </h2>
+            <svg className="h-5 w-5 shrink-0 text-gray-500 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
+          </summary>
+          <div className="border-t border-gray-100 px-6 py-4 prose prose-gray max-w-none text-gray-700">
+            <p>{t('howItWorks.retirement.p1')}</p>
+            <p>{t('howItWorks.retirement.p2')}</p>
+            <p>{t('howItWorks.retirement.p3')}</p>
+            <p>{t('howItWorks.retirement.p4')}</p>
+          </div>
+        </details>
       </section>
 
       {/* FAQ */}

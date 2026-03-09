@@ -4,6 +4,7 @@ import type {
   InterpretationItem,
 } from '../calculations/types.ts';
 import { formatCurrency, formatYearsMonths } from '../formatters.ts';
+import type { CurrencyCode } from '../currency/config.ts';
 
 /**
  * Generate interpretation items (translation keys + values) for investment growth results.
@@ -11,8 +12,10 @@ import { formatCurrency, formatYearsMonths } from '../formatters.ts';
 export function generateInvestmentGrowthInterpretations(
   inputs: InvestmentGrowthInputs,
   result: InvestmentGrowthResult,
+  currency: CurrencyCode = 'USD',
 ): InterpretationItem[] {
   const items: InterpretationItem[] = [];
+  const fmt = (v: number) => formatCurrency(v, currency);
 
   const [conservative, base, aggressive] = result.scenarios;
 
@@ -21,7 +24,7 @@ export function generateInvestmentGrowthInterpretations(
     key: 'interpretation.ig.baseSummary',
     values: {
       rate: inputs.annualReturn,
-      total: formatCurrency(base.result.finalBalance),
+      total: fmt(base.result.finalBalance),
       years: inputs.years,
     },
   });
@@ -34,16 +37,16 @@ export function generateInvestmentGrowthInterpretations(
       values: {
         conservativeRate: conservative.returnRate,
         aggressiveRate: aggressive.returnRate,
-        spread: formatCurrency(spread),
-        conservativeTotal: formatCurrency(conservative.result.finalBalance),
-        aggressiveTotal: formatCurrency(aggressive.result.finalBalance),
+        spread: fmt(spread),
+        conservativeTotal: fmt(conservative.result.finalBalance),
+        aggressiveTotal: fmt(aggressive.result.finalBalance),
       },
     });
   }
 
   // 3. Target info
   if (inputs.targetAmount !== null && inputs.targetAmount > 0) {
-    const targetFormatted = formatCurrency(inputs.targetAmount);
+    const targetFormatted = fmt(inputs.targetAmount);
 
     if (base.yearsToTarget !== null) {
       items.push({
@@ -59,7 +62,7 @@ export function generateInvestmentGrowthInterpretations(
         values: {
           target: targetFormatted,
           years: inputs.years,
-          requiredMonthly: formatCurrency(result.requiredMonthly),
+          requiredMonthly: fmt(result.requiredMonthly),
         },
       });
     } else {
@@ -70,6 +73,19 @@ export function generateInvestmentGrowthInterpretations(
         },
       });
     }
+  }
+
+  // 4. Fee impact insight
+  if (result.feeImpact !== null && result.feeImpact.totalFeesLost > 0) {
+    items.push({
+      key: 'interpretation.ig.feeImpact',
+      values: {
+        expenseRatio: inputs.expenseRatio,
+        totalFeesLost: fmt(result.feeImpact.totalFeesLost),
+        balanceWithFees: fmt(result.feeImpact.balanceWithFees),
+        balanceWithoutFees: fmt(result.feeImpact.balanceWithoutFees),
+      },
+    });
   }
 
   return items;

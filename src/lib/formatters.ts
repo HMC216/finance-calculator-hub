@@ -1,16 +1,24 @@
-export function formatCurrency(value: number): string {
+import type { CurrencyCode } from './currency/config.ts';
+
+export function formatCurrency(
+  value: number,
+  currencyCode: CurrencyCode = 'USD',
+): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: currencyCode,
     minimumFractionDigits: 0,
     maximumFractionDigits: 0,
   }).format(value);
 }
 
-export function formatCurrencyDetailed(value: number): string {
+export function formatCurrencyDetailed(
+  value: number,
+  currencyCode: CurrencyCode = 'USD',
+): string {
   return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'USD',
+    currency: currencyCode,
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   }).format(value);

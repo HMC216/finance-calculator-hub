@@ -14,6 +14,9 @@ import {
 } from 'recharts';
 import type { YearlyDataPoint, ScenarioResult } from '@/lib/calculations/types.ts';
 import { formatCurrency } from '@/lib/formatters.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
+import { currencyConfig } from '@/lib/currency/config.ts';
+import type { CurrencyCode } from '@/lib/currency/config.ts';
 
 interface GrowthChartProps {
   data: YearlyDataPoint[];
@@ -35,9 +38,10 @@ interface CustomTooltipProps {
   payload?: CustomTooltipPayloadEntry[];
   label?: string | number;
   yearLabel?: string;
+  currencyCode?: CurrencyCode;
 }
 
-function ChartTooltip({ active, payload, label, yearLabel }: CustomTooltipProps) {
+function ChartTooltip({ active, payload, label, yearLabel, currencyCode = 'USD' }: CustomTooltipProps) {
   if (!active || !payload || payload.length === 0) return null;
 
   return (
@@ -53,7 +57,7 @@ function ChartTooltip({ active, payload, label, yearLabel }: CustomTooltipProps)
           />
           <span className="text-gray-600">{entry.name}:</span>
           <span className="font-mono font-medium text-gray-900">
-            {formatCurrency(entry.value)}
+            {formatCurrency(entry.value, currencyCode)}
           </span>
         </div>
       ))}
@@ -61,10 +65,13 @@ function ChartTooltip({ active, payload, label, yearLabel }: CustomTooltipProps)
   );
 }
 
-function formatYAxisTick(value: number): string {
-  if (value >= 1_000_000) return `$${(value / 1_000_000).toFixed(1)}M`;
-  if (value >= 1_000) return `$${(value / 1_000).toFixed(0)}K`;
-  return `$${value}`;
+function createYAxisFormatter(currencyCode: CurrencyCode) {
+  const sym = currencyConfig[currencyCode].symbol;
+  return (value: number): string => {
+    if (value >= 1_000_000) return `${sym}${(value / 1_000_000).toFixed(1)}M`;
+    if (value >= 1_000) return `${sym}${(value / 1_000).toFixed(0)}K`;
+    return `${sym}${value}`;
+  };
 }
 
 const SCENARIO_COLORS = {
@@ -81,6 +88,8 @@ export default function GrowthChart({
   height = 350,
 }: GrowthChartProps) {
   const t = useTranslations();
+  const { currency } = useCurrency();
+  const formatYAxisTick = createYAxisFormatter(currency);
 
   const resolvedXAxisLabel = xAxisLabel ?? t('chart.year');
   const contributionsLabel = t('chart.contributions');
@@ -108,7 +117,7 @@ export default function GrowthChart({
               tick={{ fontSize: 12, fill: '#6b7280' }}
               width={60}
             />
-            <Tooltip content={<ChartTooltip yearLabel={yearLabel} />} />
+            <Tooltip content={<ChartTooltip yearLabel={yearLabel} currencyCode={currency} />} />
             <Area
               type="monotone"
               dataKey="contributions"
@@ -169,7 +178,7 @@ export default function GrowthChart({
             tick={{ fontSize: 12, fill: '#6b7280' }}
             width={60}
           />
-          <Tooltip content={<ChartTooltip yearLabel={yearLabel} />} />
+          <Tooltip content={<ChartTooltip yearLabel={yearLabel} currencyCode={currency} />} />
           {scenarios.map((scenario) => (
             <Line
               key={scenario.label}

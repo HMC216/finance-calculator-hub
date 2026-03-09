@@ -1,6 +1,7 @@
 import type {
   InvestmentGrowthInputs,
   InvestmentGrowthResult,
+  FeeImpactResult,
   ScenarioResult,
   CompoundInterestResult,
 } from './types.ts';
@@ -98,5 +99,21 @@ export function calculateInvestmentGrowth(
     );
   }
 
-  return { scenarios, requiredMonthly };
+  // Fee impact analysis
+  let feeImpact: FeeImpactResult | null = null;
+  if (inputs.expenseRatio > 0) {
+    const balanceWithoutFees = scenarios[1].result.finalBalance; // base scenario, no fees
+    const effectiveReturn = Math.max(0, inputs.annualReturn - inputs.expenseRatio);
+    const withFeesResult = calculateCompoundInterest({
+      ...inputs,
+      annualReturn: effectiveReturn,
+    });
+    feeImpact = {
+      balanceWithFees: withFeesResult.finalBalance,
+      balanceWithoutFees,
+      totalFeesLost: roundToCents(balanceWithoutFees - withFeesResult.finalBalance),
+    };
+  }
+
+  return { scenarios, requiredMonthly, feeImpact };
 }

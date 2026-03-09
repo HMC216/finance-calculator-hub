@@ -13,6 +13,7 @@ export interface CompoundInterestInputs {
 
 export interface InvestmentGrowthInputs extends CompoundInterestInputs {
   targetAmount: number | null;
+  expenseRatio: number;
 }
 
 export interface RetirementInputs {
@@ -22,6 +23,8 @@ export interface RetirementInputs {
   monthlyContribution: number;
   annualReturn: number;
   desiredFund: number | null;
+  annualExpenses: number | null;
+  withdrawalRate: number;
 }
 
 // ─── Outputs ─────────────────────────────────────────────
@@ -48,9 +51,16 @@ export interface ScenarioResult {
   yearsToTarget: number | null;
 }
 
+export interface FeeImpactResult {
+  balanceWithFees: number;
+  balanceWithoutFees: number;
+  totalFeesLost: number;
+}
+
 export interface InvestmentGrowthResult {
   scenarios: [ScenarioResult, ScenarioResult, ScenarioResult];
   requiredMonthly: number | null;
+  feeImpact: FeeImpactResult | null;
 }
 
 export interface RetirementResult {
@@ -61,6 +71,9 @@ export interface RetirementResult {
   gap: number | null;
   requiredAdditionalMonthly: number | null;
   readiness: 'on_track' | 'close' | 'behind' | 'no_target';
+  fireNumber: number | null;
+  monthlyRetirementIncome: number;
+  fireProgress: number | null;
 }
 
 // ─── Interpretation ──────────────────────────────────────

@@ -45,6 +45,7 @@ export const CALCULATOR_LIMITS = {
       default: 'monthly' as const,
     },
     targetAmount: { min: 0, max: 10_000_000, step: 10_000, default: 0 } satisfies FieldLimit,
+    expenseRatio: { min: 0, max: 3, step: 0.01, default: 0 } satisfies FieldLimit,
   },
   retirement: {
     currentAge: { min: 18, max: 80, step: 1, default: 30 } satisfies FieldLimit,
@@ -53,5 +54,7 @@ export const CALCULATOR_LIMITS = {
     monthlyContribution: { min: 0, max: 20_000, step: 100, default: 1000 } satisfies FieldLimit,
     annualReturn: { min: 0, max: 30, step: 0.1, default: 7 } satisfies FieldLimit,
     desiredFund: { min: 0, max: 10_000_000, step: 10_000, default: 0 } satisfies FieldLimit,
+    annualExpenses: { min: 0, max: 500_000, step: 1000, default: 0 } satisfies FieldLimit,
+    withdrawalRate: { min: 1, max: 10, step: 0.5, default: 4 } satisfies FieldLimit,
   },
 } as const;

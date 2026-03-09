@@ -15,7 +15,8 @@
     "lastUpdated": "最后更新：2025年1月1日",
     "contact": "联系我们",
     "contactText": "如果您对本{document}有任何疑问，请通过以下方式联系我们。",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "选择货币"
   },
   "nav": {
     "compoundInterest": "复利",
@@ -52,6 +53,9 @@
     "retirementAge": "退休年龄",
     "currentSavings": "当前储蓄",
     "desiredRetirementFund": "目标退休资金（可选）",
+    "annualExpenses": "年度支出（可选）",
+    "withdrawalRate": "提取率",
+    "expenseRatio": "费用率（年费）",
     "monthly": "每月",
     "quarterly": "每季",
     "annually": "每年",
@@ -69,7 +73,10 @@
     "currentSavings": "目前已为退休储蓄的金额。",
     "monthlyContributionRetirement": "每月计划储蓄的金额。",
     "annualReturnRetirement": "投资的预期年化收益率。",
-    "desiredRetirementFund": "退休储蓄目标金额。如不确定，请保持为0。"
+    "desiredRetirementFund": "退休储蓄目标金额。如不确定，请保持为0。",
+    "annualExpenses": "您退休后的预计年度生活费用。用于计算您的FIRE数字。",
+    "withdrawalRate": "您计划每年从储蓄中提取的百分比。4%规则是常见的指导原则。",
+    "expenseRatio": "投资基金收取的年度费用百分比。即使是小额费用也会随时间复利增长。"
   },
   "results": {
     "finalBalance": "最终余额",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count}年",
     "scenarioGrowthComparison": "各方案增长对比",
     "savingsGrowthByAge": "按年龄的储蓄增长",
-    "resultInterpretation": "结果解读"
+    "resultInterpretation": "结果解读",
+    "monthlyRetirementIncome": "月退休收入",
+    "feeImpactTitle": "费用影响分析",
+    "withoutFees": "无费用",
+    "withFees": "含{rate}%费用",
+    "totalFeesLost": "费用总成本"
   },
   "table": {
     "year": "年份",
@@ -120,7 +132,11 @@
     "noTargetDescription": "请设定目标退休资金以查看退休准备状况。",
     "readinessAriaLabel": "退休准备状况：{status}",
     "gap": "差额：{amount}",
-    "saveMore": "每月多储蓄{amount}即可弥补差额。"
+    "saveMore": "每月多储蓄{amount}即可弥补差额。",
+    "fireNumber": "FIRE数字",
+    "fireTargetLabel": "基于{rate}%提取率",
+    "fireProgress": "FIRE进度",
+    "fireGap": "您还需要{amount}才能达到FIRE数字。"
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "保守型（{conservativeRate}%）和激进型（{aggressiveRate}%）方案之间的差额为{spread}，范围从{conservativeTotal}到{aggressiveTotal}。",
       "targetReached": "在基准收益率下，{time}后将达到目标金额{target}。",
       "targetRequiresMore": "要在{years}年内达到目标金额{target}，需要每月定投{requiredMonthly}。",
-      "targetWithinReach": "以当前的定投金额，目标金额{target}已可实现。"
+      "targetWithinReach": "以当前的定投金额，目标金额{target}已可实现。",
+      "feeImpact": "{expenseRatio}%的费用率在投资期间花费您{totalFeesLost}。无费用：{balanceWithoutFees}。含费用：{balanceWithFees}。"
     },
     "ret": {
       "mainSummary": "到{retirementAge}岁时，您预计可积累约{balance}的退休资金。",
@@ -142,7 +159,9 @@
       "close": "您已接近目标{goal}，差额为{gap}。稍作调整即可弥补差额。",
       "behind": "您距离目标{goal}还有{gap}的差额。请考虑增加定投金额或调整您的计划。",
       "noTarget": "设定退休目标以评估储蓄状况并获得个性化指导。",
-      "gapClosing": "每月多定投{additionalMonthly}即可在退休前弥补差额。"
+      "gapClosing": "每月多定投{additionalMonthly}即可在退休前弥补差额。",
+      "fireNumber": "您的FIRE数字为{fireNumber}，基于{withdrawalRate}%的提取率。您已完成{progress}%。",
+      "monthlyIncome": "按{withdrawalRate}%提取率计算，您的预计月退休收入为{monthlyIncome}。"
     }
   },
   "seo": {

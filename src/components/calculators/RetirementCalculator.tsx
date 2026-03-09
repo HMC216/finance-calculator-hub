@@ -4,6 +4,8 @@ import { useTranslations } from 'next-intl';
 import { useRetirementCalculator } from '@/hooks/useCalculator.ts';
 import { CALCULATOR_LIMITS } from '@/lib/constants.ts';
 import { formatCurrency } from '@/lib/formatters.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
+import { currencyConfig } from '@/lib/currency/config.ts';
 import { cn } from '@/lib/utils.ts';
 import InputField from '@/components/ui/InputField.tsx';
 import ResultCard from '@/components/ui/ResultCard.tsx';
@@ -77,6 +79,8 @@ const READINESS_DESC_KEYS = {
 
 export default function RetirementCalculator() {
   const t = useTranslations();
+  const { currency } = useCurrency();
+  const currencySymbol = currencyConfig[currency].symbol;
   const { inputs, setInputs, result, interpretations } =
     useRetirementCalculator();
 
@@ -122,7 +126,7 @@ export default function RetirementCalculator() {
             min={limits.currentSavings.min}
             max={limits.currentSavings.max}
             step={limits.currentSavings.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.currentSavings')}
             showSlider={true}
           />
@@ -134,7 +138,7 @@ export default function RetirementCalculator() {
             min={limits.monthlyContribution.min}
             max={limits.monthlyContribution.max}
             step={limits.monthlyContribution.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.monthlyContributionRetirement')}
             showSlider={true}
           />
@@ -158,20 +162,50 @@ export default function RetirementCalculator() {
             min={limits.desiredFund.min}
             max={limits.desiredFund.max}
             step={limits.desiredFund.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.desiredRetirementFund')}
+            showSlider={true}
+          />
+          <InputField
+            id="ret-expenses"
+            label={t('calculatorInputs.annualExpenses')}
+            value={inputs.annualExpenses ?? 0}
+            onChange={(v) => setInputs({ expenses: v > 0 ? v : null })}
+            min={limits.annualExpenses.min}
+            max={limits.annualExpenses.max}
+            step={limits.annualExpenses.step}
+            prefix={currencySymbol}
+            tooltip={t('tooltips.annualExpenses')}
+            showSlider={true}
+          />
+          <InputField
+            id="ret-wr"
+            label={t('calculatorInputs.withdrawalRate')}
+            value={inputs.withdrawalRate}
+            onChange={(v) => setInputs({ wr: v })}
+            min={limits.withdrawalRate.min}
+            max={limits.withdrawalRate.max}
+            step={limits.withdrawalRate.step}
+            suffix="%"
+            tooltip={t('tooltips.withdrawalRate')}
             showSlider={true}
           />
         </div>
       </div>
 
       {/* Result Cards */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <ResultCard
           label={t('results.estimatedBalanceAtRetirement')}
           value={result.estimatedBalance}
           format="currency"
           variant="primary"
+        />
+        <ResultCard
+          label={t('results.monthlyRetirementIncome')}
+          value={result.monthlyRetirementIncome}
+          format="currency"
+          variant="highlight"
         />
         <ResultCard
           label={t('results.totalContributions')}
@@ -183,9 +217,63 @@ export default function RetirementCalculator() {
           label={t('results.totalInterest')}
           value={result.totalInterest}
           format="currency"
-          variant="highlight"
+          variant="secondary"
         />
       </div>
+
+      {/* FIRE Number Section */}
+      {result.fireNumber !== null && result.fireProgress !== null && (
+        <div className="rounded-xl border border-orange-200 bg-gradient-to-br from-orange-50 to-amber-50 p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <svg className="h-5 w-5 text-orange-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-orange-900">
+              {t('retirement.fireNumber')}
+            </h3>
+          </div>
+          <div className="mb-4 flex items-baseline gap-2">
+            <span className="font-mono text-3xl font-bold text-orange-800">
+              {formatCurrency(result.fireNumber, currency)}
+            </span>
+            <span className="text-sm text-orange-600">
+              {t('retirement.fireTargetLabel', { rate: inputs.withdrawalRate })}
+            </span>
+          </div>
+          {/* Progress Bar */}
+          <div className="mb-2">
+            <div className="mb-1 flex justify-between text-sm">
+              <span className="text-orange-700">{t('retirement.fireProgress')}</span>
+              <span className="font-semibold text-orange-900">
+                {Math.round(result.fireProgress)}%
+              </span>
+            </div>
+            <div className="h-3 w-full overflow-hidden rounded-full bg-orange-200">
+              <div
+                className={cn(
+                  'h-full rounded-full transition-all duration-500',
+                  result.fireProgress >= 100
+                    ? 'bg-green-500'
+                    : result.fireProgress >= 75
+                      ? 'bg-orange-500'
+                      : result.fireProgress >= 50
+                        ? 'bg-amber-500'
+                        : 'bg-red-400',
+                )}
+                style={{ width: `${Math.min(100, result.fireProgress)}%` }}
+              />
+            </div>
+          </div>
+          {result.fireProgress < 100 && (
+            <p className="mt-2 text-sm text-orange-700">
+              {t('retirement.fireGap', {
+                amount: formatCurrency(result.fireNumber - result.estimatedBalance, currency),
+              })}
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Retirement Readiness Card */}
       <div
@@ -215,12 +303,12 @@ export default function RetirementCalculator() {
             </p>
             {result.gap !== null && result.gap > 0 && (
               <p className={cn('mt-1 text-sm font-medium', styles.textColor)}>
-                {t('retirement.gap', { amount: formatCurrency(result.gap) })}
+                {t('retirement.gap', { amount: formatCurrency(result.gap, currency) })}
                 {result.requiredAdditionalMonthly !== null &&
                   result.requiredAdditionalMonthly > 0 && (
                     <span className="font-normal">
                       {' '}
-                      &mdash; {t('retirement.saveMore', { amount: formatCurrency(result.requiredAdditionalMonthly) })}
+                      &mdash; {t('retirement.saveMore', { amount: formatCurrency(result.requiredAdditionalMonthly, currency) })}
                     </span>
                   )}
               </p>

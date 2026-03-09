@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import type { ScenarioResult } from '@/lib/calculations/types.ts';
 import { formatCurrency, formatPercent } from '@/lib/formatters.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
 import { cn } from '@/lib/utils.ts';
 
 interface ScenarioCompareProps {
@@ -42,6 +43,7 @@ export default function ScenarioCompare({
   targetAmount,
 }: ScenarioCompareProps) {
   const t = useTranslations();
+  const { currency } = useCurrency();
 
   if (scenarios.length === 0) return null;
 
@@ -66,7 +68,7 @@ export default function ScenarioCompare({
               isBase ? 'shadow-md ring-2 ring-blue-400/30 md:scale-[1.03]' : 'hover:shadow-md',
             )}
             role="figure"
-            aria-label={`${translatedLabel} scenario: ${formatCurrency(scenario.result.finalBalance)} at ${formatPercent(scenario.returnRate)} return`}
+            aria-label={`${translatedLabel} scenario: ${formatCurrency(scenario.result.finalBalance, currency)} at ${formatPercent(scenario.returnRate)} return`}
           >
             {/* Badge */}
             <div className="mb-3 flex items-center gap-2">
@@ -94,7 +96,7 @@ export default function ScenarioCompare({
             {/* Final Balance */}
             <p className="mb-1 text-xs text-gray-500">{t('results.finalBalance')}</p>
             <p className="mb-4 text-2xl font-bold font-mono text-gray-900">
-              {formatCurrency(scenario.result.finalBalance)}
+              {formatCurrency(scenario.result.finalBalance, currency)}
             </p>
 
             {/* Total Contributions & Interest */}
@@ -102,13 +104,13 @@ export default function ScenarioCompare({
               <div className="flex justify-between">
                 <span>{t('results.contributions')}</span>
                 <span className="font-mono">
-                  {formatCurrency(scenario.result.totalContributions)}
+                  {formatCurrency(scenario.result.totalContributions, currency)}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span>{t('results.interestEarned')}</span>
                 <span className="font-mono text-green-600">
-                  {formatCurrency(scenario.result.totalInterest)}
+                  {formatCurrency(scenario.result.totalInterest, currency)}
                 </span>
               </div>
             </div>

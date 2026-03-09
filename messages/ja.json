@@ -15,7 +15,8 @@
     "lastUpdated": "最終更新日: 2025年1月1日",
     "contact": "お問い合わせ",
     "contactText": "この{document}についてご質問がございましたら、以下までお問い合わせください。",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "通貨を選択"
   },
   "nav": {
     "compoundInterest": "複利",
@@ -52,6 +53,9 @@
     "retirementAge": "退職年齢",
     "currentSavings": "現在の貯蓄額",
     "desiredRetirementFund": "目標退職資金（任意）",
+    "annualExpenses": "年間支出（任意）",
+    "withdrawalRate": "引出率",
+    "expenseRatio": "信託報酬（年間手数料）",
     "monthly": "毎月",
     "quarterly": "四半期ごと",
     "annually": "毎年",
@@ -69,7 +73,10 @@
     "currentSavings": "これまでに退職のために貯蓄した金額です。",
     "monthlyContributionRetirement": "毎月貯蓄する予定の金額です。",
     "annualReturnRetirement": "投資に対する予想年間利回りです。",
-    "desiredRetirementFund": "退職時の貯蓄目標額です。不確かな場合は0のままにしてください。"
+    "desiredRetirementFund": "退職時の貯蓄目標額です。不確かな場合は0のままにしてください。",
+    "annualExpenses": "退職後の推定年間生活費です。FIRE数値の計算に使用されます。",
+    "withdrawalRate": "毎年貯蓄から引き出す予定の割合です。4%ルールが一般的なガイドラインです。",
+    "expenseRatio": "投資信託が課す年間手数料率です。小さな手数料でも時間とともに複利で増加します。"
   },
   "results": {
     "finalBalance": "最終残高",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count}年",
     "scenarioGrowthComparison": "シナリオ別成長比較",
     "savingsGrowthByAge": "年齢別貯蓄の成長",
-    "resultInterpretation": "結果の解釈"
+    "resultInterpretation": "結果の解釈",
+    "monthlyRetirementIncome": "月間退職収入",
+    "feeImpactTitle": "手数料影響分析",
+    "withoutFees": "手数料なし",
+    "withFees": "{rate}%手数料あり",
+    "totalFeesLost": "手数料の総コスト"
   },
   "table": {
     "year": "年",
@@ -120,7 +132,11 @@
     "noTargetDescription": "退職準備状況を確認するには、目標退職資金を設定してください。",
     "readinessAriaLabel": "退職準備状況: {status}",
     "gap": "不足額: {amount}",
-    "saveMore": "不足分を埋めるには、毎月{amount}を追加で貯蓄してください。"
+    "saveMore": "不足分を埋めるには、毎月{amount}を追加で貯蓄してください。",
+    "fireNumber": "FIRE数値",
+    "fireTargetLabel": "{rate}%引出率ベース",
+    "fireProgress": "FIRE達成率",
+    "fireGap": "FIRE数値まであと{amount}必要です。"
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "保守的（{conservativeRate}%）と積極的（{aggressiveRate}%）シナリオの差額は{spread}で、{conservativeTotal}から{aggressiveTotal}の範囲です。",
       "targetReached": "基本利回りで{time}後に目標額{target}に達します。",
       "targetRequiresMore": "{years}年以内に目標額{target}に達するには、毎月{requiredMonthly}の積立が必要です。",
-      "targetWithinReach": "現在の積立額で目標額{target}はすでに達成可能です。"
+      "targetWithinReach": "現在の積立額で目標額{target}はすでに達成可能です。",
+      "feeImpact": "{expenseRatio}%の信託報酬により、投資期間中に{totalFeesLost}のコストが発生します。手数料なし：{balanceWithoutFees}。手数料あり：{balanceWithFees}。"
     },
     "ret": {
       "mainSummary": "{retirementAge}歳までに約{balance}の退職資金を貯蓄できます。",
@@ -142,7 +159,9 @@
       "close": "目標{goal}に近づいており、不足額は{gap}です。わずかな調整で不足分を埋めることができます。",
       "behind": "目標{goal}に対して{gap}不足しています。積立額の増額や計画の調整をご検討ください。",
       "noTarget": "貯蓄状況を評価し、個別のアドバイスを得るには、退職目標を設定してください。",
-      "gapClosing": "毎月{additionalMonthly}を追加で積み立てれば、退職時までに不足分を埋めることができます。"
+      "gapClosing": "毎月{additionalMonthly}を追加で積み立てれば、退職時までに不足分を埋めることができます。",
+      "fireNumber": "FIRE数値は{withdrawalRate}%の引出率に基づき{fireNumber}です。現在{progress}%達成しています。",
+      "monthlyIncome": "{withdrawalRate}%の引出率で、推定月間退職収入は{monthlyIncome}です。"
     }
   },
   "seo": {

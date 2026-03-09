@@ -2,6 +2,7 @@
 
 import { cn } from '@/lib/utils.ts';
 import { formatCurrency, formatPercent } from '@/lib/formatters.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
 
 interface ResultCardProps {
   label: string;
@@ -39,9 +40,10 @@ export default function ResultCard({
   variant = 'primary',
   description,
 }: ResultCardProps) {
+  const { currency } = useCurrency();
   const styles = variantStyles[variant];
   const formattedValue =
-    format === 'currency' ? formatCurrency(value) : formatPercent(value);
+    format === 'currency' ? formatCurrency(value, currency) : formatPercent(value);
 
   return (
     <div

@@ -4,11 +4,12 @@ import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/navigation.ts';
 import { SITE_CONFIG } from '@/lib/constants.ts';
 import LocaleSwitcher from '@/components/layout/LocaleSwitcher.tsx';
+import CurrencySwitcher from '@/components/layout/CurrencySwitcher.tsx';
 
 const NAV_LINK_KEYS = [
-  { href: '/compound-interest-calculator' as const, key: 'nav.compoundInterest' },
-  { href: '/investment-growth-calculator' as const, key: 'nav.investmentGrowth' },
   { href: '/retirement-calculator' as const, key: 'nav.retirement' },
+  { href: '/investment-growth-calculator' as const, key: 'nav.investmentGrowth' },
+  { href: '/compound-interest-calculator' as const, key: 'nav.compoundInterest' },
 ];
 
 export default function Header() {
@@ -38,6 +39,7 @@ export default function Header() {
               ))}
             </ul>
           </nav>
+          <CurrencySwitcher />
           <LocaleSwitcher />
         </div>
       </div>

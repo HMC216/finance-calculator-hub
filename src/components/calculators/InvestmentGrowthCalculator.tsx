@@ -4,6 +4,9 @@ import { useTranslations } from 'next-intl';
 import { useInvestmentGrowthCalculator } from '@/hooks/useCalculator.ts';
 import { CALCULATOR_LIMITS } from '@/lib/constants.ts';
 import type { CompoundFrequency } from '@/lib/calculations/types.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
+import { currencyConfig } from '@/lib/currency/config.ts';
+import { formatCurrency } from '@/lib/formatters.ts';
 import InputField from '@/components/ui/InputField.tsx';
 import ScenarioCompare from '@/components/ui/ScenarioCompare.tsx';
 import GrowthChart from '@/components/ui/GrowthChart.tsx';
@@ -15,6 +18,8 @@ const limits = CALCULATOR_LIMITS.investmentGrowth;
 
 export default function InvestmentGrowthCalculator() {
   const t = useTranslations();
+  const { currency } = useCurrency();
+  const currencySymbol = currencyConfig[currency].symbol;
   const { inputs, setInputs, result, interpretations } =
     useInvestmentGrowthCalculator();
 
@@ -43,7 +48,7 @@ export default function InvestmentGrowthCalculator() {
             min={limits.initialAmount.min}
             max={limits.initialAmount.max}
             step={limits.initialAmount.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.initialInvestment')}
             showSlider={true}
           />
@@ -55,7 +60,7 @@ export default function InvestmentGrowthCalculator() {
             min={limits.monthlyContribution.min}
             max={limits.monthlyContribution.max}
             step={limits.monthlyContribution.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.monthlyContribution')}
             showSlider={true}
           />
@@ -116,8 +121,20 @@ export default function InvestmentGrowthCalculator() {
             min={limits.targetAmount.min}
             max={limits.targetAmount.max}
             step={limits.targetAmount.step}
-            prefix="$"
+            prefix={currencySymbol}
             tooltip={t('tooltips.targetAmount')}
+            showSlider={true}
+          />
+          <InputField
+            id="ig-fees"
+            label={t('calculatorInputs.expenseRatio')}
+            value={inputs.expenseRatio}
+            onChange={(v) => setInputs({ fees: v })}
+            min={limits.expenseRatio.min}
+            max={limits.expenseRatio.max}
+            step={limits.expenseRatio.step}
+            suffix="%"
+            tooltip={t('tooltips.expenseRatio')}
             showSlider={true}
           />
         </div>
@@ -128,6 +145,42 @@ export default function InvestmentGrowthCalculator() {
         scenarios={[...result.scenarios]}
         targetAmount={inputs.targetAmount}
       />
+
+      {/* Fee Impact Analysis */}
+      {result.feeImpact !== null && (
+        <div className="rounded-xl border border-red-200 bg-gradient-to-br from-red-50 to-orange-50 p-6">
+          <div className="mb-4 flex items-center gap-2">
+            <svg className="h-5 w-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <h3 className="text-lg font-semibold text-red-900">
+              {t('results.feeImpactTitle')}
+            </h3>
+          </div>
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+            <div className="rounded-lg bg-white/70 p-4">
+              <p className="mb-1 text-xs text-gray-500">{t('results.withoutFees')}</p>
+              <p className="font-mono text-xl font-bold text-green-700">
+                {formatCurrency(result.feeImpact.balanceWithoutFees, currency)}
+              </p>
+            </div>
+            <div className="rounded-lg bg-white/70 p-4">
+              <p className="mb-1 text-xs text-gray-500">
+                {t('results.withFees', { rate: inputs.expenseRatio })}
+              </p>
+              <p className="font-mono text-xl font-bold text-gray-700">
+                {formatCurrency(result.feeImpact.balanceWithFees, currency)}
+              </p>
+            </div>
+            <div className="rounded-lg bg-red-100/70 p-4">
+              <p className="mb-1 text-xs text-red-600">{t('results.totalFeesLost')}</p>
+              <p className="font-mono text-xl font-bold text-red-700">
+                −{formatCurrency(result.feeImpact.totalFeesLost, currency)}
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Growth Chart */}
       <div className="rounded-xl border border-gray-200 bg-white p-6">

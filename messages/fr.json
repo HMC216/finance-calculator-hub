@@ -15,7 +15,8 @@
     "lastUpdated": "Dernière mise à jour : 1er janvier 2025",
     "contact": "Contact",
     "contactText": "Si vous avez des questions concernant ce {document}, veuillez nous contacter à",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "Choisir la devise"
   },
   "nav": {
     "compoundInterest": "Intérêts Composés",
@@ -52,6 +53,9 @@
     "retirementAge": "Âge de départ à la retraite",
     "currentSavings": "Épargne actuelle",
     "desiredRetirementFund": "Fonds de retraite souhaité (optionnel)",
+    "annualExpenses": "Dépenses annuelles (optionnel)",
+    "withdrawalRate": "Taux de retrait",
+    "expenseRatio": "Ratio de frais (frais annuels)",
     "monthly": "Mensuel",
     "quarterly": "Trimestriel",
     "annually": "Annuel",
@@ -69,7 +73,10 @@
     "currentSavings": "Le montant que vous avez épargné pour la retraite jusqu'à présent.",
     "monthlyContributionRetirement": "Combien vous prévoyez d'épargner chaque mois.",
     "annualReturnRetirement": "Taux de rendement annuel attendu sur vos investissements.",
-    "desiredRetirementFund": "Votre objectif d'épargne retraite. Laissez à 0 si vous n'êtes pas sûr."
+    "desiredRetirementFund": "Votre objectif d'épargne retraite. Laissez à 0 si vous n'êtes pas sûr.",
+    "annualExpenses": "Vos dépenses annuelles estimées à la retraite. Utilisé pour calculer votre Nombre FIRE.",
+    "withdrawalRate": "Le pourcentage d'épargne que vous prévoyez retirer annuellement. La règle des 4% est un guide courant.",
+    "expenseRatio": "Les frais annuels facturés par les fonds d'investissement. Même de petits frais s'accumulent avec le temps."
   },
   "results": {
     "finalBalance": "Solde final",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count} {count, plural, one {an} other {ans}}",
     "scenarioGrowthComparison": "Comparaison de la croissance par scénarios",
     "savingsGrowthByAge": "Croissance de l'épargne par âge",
-    "resultInterpretation": "Interprétation des résultats"
+    "resultInterpretation": "Interprétation des résultats",
+    "monthlyRetirementIncome": "Revenu mensuel de retraite",
+    "feeImpactTitle": "Analyse de l'impact des frais",
+    "withoutFees": "Sans frais",
+    "withFees": "Avec frais de {rate}%",
+    "totalFeesLost": "Coût total des frais"
   },
   "table": {
     "year": "Année",
@@ -120,7 +132,11 @@
     "noTargetDescription": "Définissez un fonds de retraite souhaité pour voir votre évaluation de préparation.",
     "readinessAriaLabel": "Préparation à la retraite : {status}",
     "gap": "Écart : {amount}",
-    "saveMore": "Épargnez {amount}/mois de plus pour combler l'écart."
+    "saveMore": "Épargnez {amount}/mois de plus pour combler l'écart.",
+    "fireNumber": "Nombre FIRE",
+    "fireTargetLabel": "au taux de retrait de {rate}%",
+    "fireProgress": "Progression FIRE",
+    "fireGap": "Il vous manque {amount} pour atteindre votre nombre FIRE."
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "La différence entre le scénario conservateur ({conservativeRate}%) et agressif ({aggressiveRate}%) est de {spread}, allant de {conservativeTotal} à {aggressiveTotal}.",
       "targetReached": "Vous atteindrez votre objectif de {target} en {time} au taux de base.",
       "targetRequiresMore": "Pour atteindre votre objectif de {target} en {years} ans, vous devez verser {requiredMonthly}/mois.",
-      "targetWithinReach": "Votre objectif de {target} est déjà à portée avec vos versements actuels."
+      "targetWithinReach": "Votre objectif de {target} est déjà à portée avec vos versements actuels.",
+      "feeImpact": "Un ratio de frais de {expenseRatio}% vous coûte {totalFeesLost} sur la période d'investissement. Sans frais : {balanceWithoutFees}. Avec frais : {balanceWithFees}."
     },
     "ret": {
       "mainSummary": "À l'âge de {retirementAge} ans, vous aurez environ {balance} épargnés pour la retraite.",
@@ -142,7 +159,9 @@
       "close": "Vous êtes proche de votre objectif de {goal}, avec un écart de {gap}. Un petit ajustement peut combler la différence.",
       "behind": "Vous êtes en retard par rapport à votre objectif de {goal} de {gap}. Envisagez d'augmenter vos versements ou d'ajuster votre horizon temporel.",
       "noTarget": "Définissez un objectif de retraite pour voir comment votre épargne se compare et obtenir des conseils personnalisés.",
-      "gapClosing": "Verser {additionalMonthly} de plus par mois comble l'écart avant la retraite."
+      "gapClosing": "Verser {additionalMonthly} de plus par mois comble l'écart avant la retraite.",
+      "fireNumber": "Votre Nombre FIRE est {fireNumber} basé sur un taux de retrait de {withdrawalRate}%. Vous avez atteint {progress}%.",
+      "monthlyIncome": "Avec un taux de retrait de {withdrawalRate}%, votre revenu mensuel estimé à la retraite serait de {monthlyIncome}."
     }
   },
   "seo": {

@@ -6,6 +6,7 @@ import type {
 import { calculateCompoundInterest } from '../calculations/compound-interest.ts';
 import { formatCurrency } from '../formatters.ts';
 import { ruleOf72 } from '../calculations/shared.ts';
+import type { CurrencyCode } from '../currency/config.ts';
 
 /**
  * Generate interpretation items (translation keys + values) for compound interest results.
@@ -13,21 +14,23 @@ import { ruleOf72 } from '../calculations/shared.ts';
 export function generateCompoundInterestInterpretations(
   inputs: CompoundInterestInputs,
   result: CompoundInterestResult,
+  currency: CurrencyCode = 'USD',
 ): InterpretationItem[] {
   const items: InterpretationItem[] = [];
+  const fmt = (v: number) => formatCurrency(v, currency);
 
   // 1. Main summary
-  const totalFormatted = formatCurrency(result.finalBalance);
+  const totalFormatted = fmt(result.finalBalance);
   const interestPct = result.interestPercentage.toFixed(0);
 
   if (inputs.monthlyContribution > 0) {
     items.push({
       key: 'interpretation.ci.summaryWithContributions',
       values: {
-        monthly: formatCurrency(inputs.monthlyContribution),
+        monthly: fmt(inputs.monthlyContribution),
         rate: inputs.annualReturn,
         years: inputs.years,
-        initial: formatCurrency(inputs.initialAmount),
+        initial: fmt(inputs.initialAmount),
         total: totalFormatted,
         interestPct,
       },
@@ -36,7 +39,7 @@ export function generateCompoundInterestInterpretations(
     items.push({
       key: 'interpretation.ci.summaryWithoutContributions',
       values: {
-        initial: formatCurrency(inputs.initialAmount),
+        initial: fmt(inputs.initialAmount),
         rate: inputs.annualReturn,
         years: inputs.years,
         total: totalFormatted,
@@ -70,7 +73,7 @@ export function generateCompoundInterestInterpretations(
       items.push({
         key: 'interpretation.ci.marginalImpact',
         values: {
-          delta: formatCurrency(delta),
+          delta: fmt(delta),
         },
       });
     }

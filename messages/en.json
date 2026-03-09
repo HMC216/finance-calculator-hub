@@ -15,7 +15,8 @@
     "lastUpdated": "Last updated: January 1, 2025",
     "contact": "Contact",
     "contactText": "If you have questions about this {document}, please contact us at",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "Select currency"
   },
   "nav": {
     "compoundInterest": "Compound Interest",
@@ -52,6 +53,9 @@
     "retirementAge": "Retirement Age",
     "currentSavings": "Current Savings",
     "desiredRetirementFund": "Desired Retirement Fund (optional)",
+    "annualExpenses": "Annual Expenses (optional)",
+    "withdrawalRate": "Withdrawal Rate",
+    "expenseRatio": "Expense Ratio (annual fee)",
     "monthly": "Monthly",
     "quarterly": "Quarterly",
     "annually": "Annually",
@@ -69,7 +73,10 @@
     "currentSavings": "How much you have saved for retirement so far.",
     "monthlyContributionRetirement": "How much you plan to save each month.",
     "annualReturnRetirement": "Expected annual rate of return on your investments.",
-    "desiredRetirementFund": "Your target retirement savings goal. Leave at 0 if unsure."
+    "desiredRetirementFund": "Your target retirement savings goal. Leave at 0 if unsure.",
+    "annualExpenses": "Your estimated annual living expenses in retirement. Used to calculate your FIRE Number.",
+    "withdrawalRate": "The percentage of savings you plan to withdraw annually in retirement. The 4% rule is a common guideline.",
+    "expenseRatio": "The annual fee charged by investment funds, expressed as a percentage. Even small fees compound over time."
   },
   "results": {
     "finalBalance": "Final Balance",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count} {count, plural, one {year} other {years}}",
     "scenarioGrowthComparison": "Scenario Growth Comparison",
     "savingsGrowthByAge": "Savings Growth by Age",
-    "resultInterpretation": "Result interpretation"
+    "resultInterpretation": "Result interpretation",
+    "monthlyRetirementIncome": "Monthly Retirement Income",
+    "feeImpactTitle": "Fee Impact Analysis",
+    "withoutFees": "Without Fees",
+    "withFees": "With {rate}% Fee",
+    "totalFeesLost": "Total Cost of Fees"
   },
   "table": {
     "year": "Year",
@@ -120,7 +132,11 @@
     "noTargetDescription": "Set a desired retirement fund to see your readiness assessment.",
     "readinessAriaLabel": "Retirement readiness: {status}",
     "gap": "Gap: {amount}",
-    "saveMore": "Save {amount}/month more to close the gap."
+    "saveMore": "Save {amount}/month more to close the gap.",
+    "fireNumber": "FIRE Number",
+    "fireTargetLabel": "at {rate}% withdrawal rate",
+    "fireProgress": "FIRE Progress",
+    "fireGap": "You need {amount} more to reach your FIRE number."
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "The difference between the conservative ({conservativeRate}%) and aggressive ({aggressiveRate}%) scenarios is {spread}, ranging from {conservativeTotal} to {aggressiveTotal}.",
       "targetReached": "You'll reach your {target} goal in {time} at the base rate.",
       "targetRequiresMore": "To reach your {target} goal within {years} years, you need to contribute {requiredMonthly}/month.",
-      "targetWithinReach": "Your {target} target is already within reach with your current contributions."
+      "targetWithinReach": "Your {target} target is already within reach with your current contributions.",
+      "feeImpact": "A {expenseRatio}% expense ratio costs you {totalFeesLost} over the investment period. Without fees: {balanceWithoutFees}. With fees: {balanceWithFees}."
     },
     "ret": {
       "mainSummary": "By age {retirementAge}, you'll have approximately {balance} saved for retirement.",
@@ -142,7 +159,9 @@
       "close": "You're close to your {goal} goal, with a gap of {gap}. A small adjustment can close the gap.",
       "behind": "You're behind your {goal} goal by {gap}. Consider increasing your contributions or adjusting your timeline.",
       "noTarget": "Set a retirement goal to see how your savings measure up and get personalized guidance.",
-      "gapClosing": "Contributing {additionalMonthly} more per month closes the gap by retirement."
+      "gapClosing": "Contributing {additionalMonthly} more per month closes the gap by retirement.",
+      "fireNumber": "Your FIRE Number is {fireNumber} based on a {withdrawalRate}% withdrawal rate. You are {progress}% of the way there.",
+      "monthlyIncome": "At a {withdrawalRate}% withdrawal rate, your estimated monthly retirement income would be {monthlyIncome}."
     }
   },
   "seo": {

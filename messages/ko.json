@@ -15,7 +15,8 @@
     "lastUpdated": "최종 업데이트: 2025년 1월 1일",
     "contact": "문의",
     "contactText": "이 {document}에 대해 궁금한 점이 있으시면 아래로 연락해 주세요.",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "통화 선택"
   },
   "nav": {
     "compoundInterest": "복리",
@@ -52,6 +53,9 @@
     "retirementAge": "은퇴 나이",
     "currentSavings": "현재 저축액",
     "desiredRetirementFund": "목표 은퇴 자금 (선택사항)",
+    "annualExpenses": "연간 생활비 (선택사항)",
+    "withdrawalRate": "인출률",
+    "expenseRatio": "운용보수 (연간 수수료)",
     "monthly": "월별",
     "quarterly": "분기별",
     "annually": "연별",
@@ -69,7 +73,10 @@
     "currentSavings": "현재까지 은퇴를 위해 저축한 금액입니다.",
     "monthlyContributionRetirement": "매월 저축할 계획 금액입니다.",
     "annualReturnRetirement": "투자에 대한 예상 연간 수익률입니다.",
-    "desiredRetirementFund": "목표 은퇴 저축 금액입니다. 불확실하면 0으로 두세요."
+    "desiredRetirementFund": "목표 은퇴 저축 금액입니다. 불확실하면 0으로 두세요.",
+    "annualExpenses": "은퇴 후 예상 연간 생활비입니다. FIRE 넘버 계산에 사용됩니다.",
+    "withdrawalRate": "은퇴 후 매년 저축에서 인출할 비율입니다. 4% 규칙이 일반적인 가이드라인입니다.",
+    "expenseRatio": "투자 펀드가 부과하는 연간 수수료율입니다. 작은 수수료도 시간이 지나면 복리로 쌓입니다."
   },
   "results": {
     "finalBalance": "최종 잔액",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count}년",
     "scenarioGrowthComparison": "시나리오별 성장 비교",
     "savingsGrowthByAge": "나이별 저축 성장",
-    "resultInterpretation": "결과 해석"
+    "resultInterpretation": "결과 해석",
+    "monthlyRetirementIncome": "월 은퇴 수입",
+    "feeImpactTitle": "수수료 영향 분석",
+    "withoutFees": "수수료 없이",
+    "withFees": "{rate}% 수수료 적용 시",
+    "totalFeesLost": "수수료 총 비용"
   },
   "table": {
     "year": "연도",
@@ -120,7 +132,11 @@
     "noTargetDescription": "은퇴 준비 상태를 확인하려면 목표 은퇴 자금을 설정하세요.",
     "readinessAriaLabel": "은퇴 준비 상태: {status}",
     "gap": "부족분: {amount}",
-    "saveMore": "부족분을 채우려면 월 {amount}을 추가로 저축하세요."
+    "saveMore": "부족분을 채우려면 월 {amount}을 추가로 저축하세요.",
+    "fireNumber": "FIRE 넘버",
+    "fireTargetLabel": "{rate}% 인출률 기준",
+    "fireProgress": "FIRE 달성률",
+    "fireGap": "FIRE 넘버까지 {amount}이(가) 더 필요합니다."
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "보수적({conservativeRate}%)과 공격적({aggressiveRate}%) 시나리오 간 차이는 {spread}이며, {conservativeTotal}에서 {aggressiveTotal} 범위입니다.",
       "targetReached": "기본 수익률에서 {time} 후에 목표 금액 {target}에 도달합니다.",
       "targetRequiresMore": "{years}년 내에 목표 금액 {target}에 도달하려면 월 {requiredMonthly}의 적립이 필요합니다.",
-      "targetWithinReach": "현재 적립금으로 목표 금액 {target}에 이미 도달할 수 있습니다."
+      "targetWithinReach": "현재 적립금으로 목표 금액 {target}에 이미 도달할 수 있습니다.",
+      "feeImpact": "{expenseRatio}% 운용보수로 인해 투자 기간 동안 {totalFeesLost}의 비용이 발생합니다. 수수료 없이: {balanceWithoutFees}. 수수료 적용 시: {balanceWithFees}."
     },
     "ret": {
       "mainSummary": "{retirementAge}세까지 약 {balance}의 은퇴 자금을 모을 수 있습니다.",
@@ -142,7 +159,9 @@
       "close": "목표 {goal}에 근접해 있으며, 부족분은 {gap}입니다. 약간의 조정으로 부족분을 채울 수 있습니다.",
       "behind": "목표 {goal} 대비 {gap}이 부족합니다. 적립금을 늘리거나 계획을 조정하는 것을 고려해 보세요.",
       "noTarget": "저축 현황을 평가하고 맞춤 안내를 받으려면 은퇴 목표를 설정하세요.",
-      "gapClosing": "월 {additionalMonthly}을 추가로 적립하면 은퇴 시까지 부족분을 채울 수 있습니다."
+      "gapClosing": "월 {additionalMonthly}을 추가로 적립하면 은퇴 시까지 부족분을 채울 수 있습니다.",
+      "fireNumber": "귀하의 FIRE 넘버는 {withdrawalRate}% 인출률 기준 {fireNumber}입니다. 현재 {progress}% 달성했습니다.",
+      "monthlyIncome": "{withdrawalRate}% 인출률 기준, 예상 월 은퇴 수입은 {monthlyIncome}입니다."
     }
   },
   "seo": {

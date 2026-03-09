@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import type { YearlyDataPoint } from '@/lib/calculations/types.ts';
 import { formatCurrency } from '@/lib/formatters.ts';
+import { useCurrency } from '@/lib/currency/CurrencyContext.tsx';
 
 interface YearlyTableProps {
   data: YearlyDataPoint[];
@@ -15,6 +16,7 @@ export default function YearlyTable({
   defaultExpanded = false,
 }: YearlyTableProps) {
   const t = useTranslations();
+  const { currency } = useCurrency();
   const [expanded, setExpanded] = useState(defaultExpanded);
 
   const toggleExpanded = useCallback(() => {
@@ -96,13 +98,13 @@ export default function YearlyTable({
                     {row.year}
                   </td>
                   <td className="px-4 py-2.5 text-right font-mono text-gray-700">
-                    {formatCurrency(row.contributions)}
+                    {formatCurrency(row.contributions, currency)}
                   </td>
                   <td className="px-4 py-2.5 text-right font-mono text-green-600">
-                    {formatCurrency(row.interestEarned)}
+                    {formatCurrency(row.interestEarned, currency)}
                   </td>
                   <td className="px-4 py-2.5 text-right font-mono font-semibold text-gray-900">
-                    {formatCurrency(row.totalBalance)}
+                    {formatCurrency(row.totalBalance, currency)}
                   </td>
                 </tr>
               ))}

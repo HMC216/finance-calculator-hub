@@ -15,7 +15,8 @@
     "lastUpdated": "آخر تحديث: 1 يناير 2025",
     "contact": "اتصل بنا",
     "contactText": "إذا كانت لديك أسئلة حول هذا {document}، يرجى التواصل معنا على",
-    "email": "contact@financecalculatorhub.com"
+    "email": "contact@financecalculatorhub.com",
+    "selectCurrency": "اختر العملة"
   },
   "nav": {
     "compoundInterest": "الفائدة المركبة",
@@ -52,6 +53,9 @@
     "retirementAge": "سن التقاعد",
     "currentSavings": "المدخرات الحالية",
     "desiredRetirementFund": "صندوق التقاعد المرغوب (اختياري)",
+    "annualExpenses": "المصاريف السنوية (اختياري)",
+    "withdrawalRate": "معدل السحب",
+    "expenseRatio": "نسبة المصاريف (الرسوم السنوية)",
     "monthly": "شهري",
     "quarterly": "ربع سنوي",
     "annually": "سنوي",
@@ -69,7 +73,10 @@
     "currentSavings": "المبلغ الذي ادخرته للتقاعد حتى الآن.",
     "monthlyContributionRetirement": "المبلغ الذي تخطط لادخاره كل شهر.",
     "annualReturnRetirement": "معدل العائد السنوي المتوقع على استثماراتك.",
-    "desiredRetirementFund": "هدف مدخرات التقاعد الخاص بك. اتركه عند 0 إذا لم تكن متأكداً."
+    "desiredRetirementFund": "هدف مدخرات التقاعد الخاص بك. اتركه عند 0 إذا لم تكن متأكداً.",
+    "annualExpenses": "مصاريفك السنوية المقدرة في التقاعد. تُستخدم لحساب رقم FIRE الخاص بك.",
+    "withdrawalRate": "النسبة المئوية من المدخرات التي تخطط لسحبها سنوياً. قاعدة 4% هي المبدأ التوجيهي الشائع.",
+    "expenseRatio": "الرسوم السنوية التي تفرضها صناديق الاستثمار. حتى الرسوم الصغيرة تتراكم مع مرور الوقت."
   },
   "results": {
     "finalBalance": "الرصيد النهائي",
@@ -84,7 +91,12 @@
     "yearsToTargetValue": "{count} {count, plural, one {سنة} other {سنوات}}",
     "scenarioGrowthComparison": "مقارنة النمو حسب السيناريوهات",
     "savingsGrowthByAge": "نمو المدخرات حسب العمر",
-    "resultInterpretation": "تفسير النتائج"
+    "resultInterpretation": "تفسير النتائج",
+    "monthlyRetirementIncome": "الدخل الشهري للتقاعد",
+    "feeImpactTitle": "تحليل تأثير الرسوم",
+    "withoutFees": "بدون رسوم",
+    "withFees": "مع رسوم {rate}%",
+    "totalFeesLost": "التكلفة الإجمالية للرسوم"
   },
   "table": {
     "year": "السنة",
@@ -120,7 +132,11 @@
     "noTargetDescription": "حدد صندوق تقاعد مرغوب لمعرفة تقييم جاهزيتك.",
     "readinessAriaLabel": "الجاهزية للتقاعد: {status}",
     "gap": "الفجوة: {amount}",
-    "saveMore": "ادخر {amount}/شهر إضافية لسد الفجوة."
+    "saveMore": "ادخر {amount}/شهر إضافية لسد الفجوة.",
+    "fireNumber": "رقم FIRE",
+    "fireTargetLabel": "بمعدل سحب {rate}%",
+    "fireProgress": "تقدم FIRE",
+    "fireGap": "تحتاج إلى {amount} إضافية للوصول إلى رقم FIRE الخاص بك."
   },
   "interpretation": {
     "ci": {
@@ -134,7 +150,8 @@
       "scenarioSpread": "الفرق بين السيناريو المحافظ ({conservativeRate}%) والعدواني ({aggressiveRate}%) هو {spread}، يتراوح من {conservativeTotal} إلى {aggressiveTotal}.",
       "targetReached": "ستصل إلى هدفك البالغ {target} في {time} بالمعدل الأساسي.",
       "targetRequiresMore": "لتحقيق هدفك البالغ {target} خلال {years} سنوات، تحتاج للمساهمة بـ {requiredMonthly}/شهر.",
-      "targetWithinReach": "هدفك البالغ {target} قابل للتحقيق بالفعل بمساهماتك الحالية."
+      "targetWithinReach": "هدفك البالغ {target} قابل للتحقيق بالفعل بمساهماتك الحالية.",
+      "feeImpact": "نسبة مصاريف {expenseRatio}% تكلفك {totalFeesLost} خلال فترة الاستثمار. بدون رسوم: {balanceWithoutFees}. مع رسوم: {balanceWithFees}."
     },
     "ret": {
       "mainSummary": "بحلول سن {retirementAge}، سيكون لديك تقريباً {balance} مدخرة للتقاعد.",
@@ -142,7 +159,9 @@
       "close": "أنت قريب من هدفك البالغ {goal}، بفجوة قدرها {gap}. تعديل بسيط يمكن أن يسد الفرق.",
       "behind": "أنت متأخر عن هدفك البالغ {goal} بمقدار {gap}. فكّر في زيادة مساهماتك أو تعديل الجدول الزمني.",
       "noTarget": "حدد هدفاً للتقاعد لمعرفة كيف تقارن مدخراتك والحصول على إرشادات مخصصة.",
-      "gapClosing": "المساهمة بـ {additionalMonthly} إضافية شهرياً تسد الفجوة قبل التقاعد."
+      "gapClosing": "المساهمة بـ {additionalMonthly} إضافية شهرياً تسد الفجوة قبل التقاعد.",
+      "fireNumber": "رقم FIRE الخاص بك هو {fireNumber} بناءً على معدل سحب {withdrawalRate}%. لقد حققت {progress}% من الهدف.",
+      "monthlyIncome": "بمعدل سحب {withdrawalRate}%، سيكون دخلك الشهري المقدر للتقاعد {monthlyIncome}."
     }
   },
   "seo": {

@@ -14,6 +14,7 @@ import { calculateRetirement } from '../lib/calculations/retirement.ts';
 import { generateCompoundInterestInterpretations } from '../lib/interpretations/compound-interest.ts';
 import { generateInvestmentGrowthInterpretations } from '../lib/interpretations/investment-growth.ts';
 import { generateRetirementInterpretations } from '../lib/interpretations/retirement.ts';
+import { useCurrency } from '../lib/currency/CurrencyContext.tsx';
 
 import type {
   CompoundInterestInputs,
@@ -38,6 +39,7 @@ export function useCompoundInterestCalculator() {
     compoundInterestParsers,
     NUQS_OPTIONS,
   );
+  const { currency } = useCurrency();
 
   const inputs: CompoundInterestInputs = useMemo(
     () => ({
@@ -56,8 +58,8 @@ export function useCompoundInterestCalculator() {
   );
 
   const interpretations: InterpretationItem[] = useMemo(
-    () => generateCompoundInterestInterpretations(inputs, result),
-    [inputs, result],
+    () => generateCompoundInterestInterpretations(inputs, result, currency),
+    [inputs, result, currency],
   );
 
   return { inputs, setInputs: setParams, result, interpretations } as const;
@@ -70,6 +72,7 @@ export function useInvestmentGrowthCalculator() {
     investmentGrowthParsers,
     NUQS_OPTIONS,
   );
+  const { currency } = useCurrency();
 
   const inputs: InvestmentGrowthInputs = useMemo(
     () => ({
@@ -79,6 +82,7 @@ export function useInvestmentGrowthCalculator() {
       annualReturn: params.return,
       compoundFrequency: params.freq,
       targetAmount: params.target,
+      expenseRatio: params.fees,
     }),
     [
       params.init,
@@ -87,6 +91,7 @@ export function useInvestmentGrowthCalculator() {
       params.return,
       params.freq,
       params.target,
+      params.fees,
     ],
   );
 
@@ -96,8 +101,8 @@ export function useInvestmentGrowthCalculator() {
   );
 
   const interpretations: InterpretationItem[] = useMemo(
-    () => generateInvestmentGrowthInterpretations(inputs, result),
-    [inputs, result],
+    () => generateInvestmentGrowthInterpretations(inputs, result, currency),
+    [inputs, result, currency],
   );
 
   return { inputs, setInputs: setParams, result, interpretations } as const;
@@ -110,6 +115,7 @@ export function useRetirementCalculator() {
     retirementParsers,
     NUQS_OPTIONS,
   );
+  const { currency } = useCurrency();
 
   const inputs: RetirementInputs = useMemo(
     () => ({
@@ -119,6 +125,8 @@ export function useRetirementCalculator() {
       monthlyContribution: params.monthly,
       annualReturn: params.return,
       desiredFund: params.goal,
+      annualExpenses: params.expenses,
+      withdrawalRate: params.wr,
     }),
     [
       params.age,
@@ -127,6 +135,8 @@ export function useRetirementCalculator() {
       params.monthly,
       params.return,
       params.goal,
+      params.expenses,
+      params.wr,
     ],
   );
 
@@ -136,8 +146,8 @@ export function useRetirementCalculator() {
   );
 
   const interpretations: InterpretationItem[] = useMemo(
-    () => generateRetirementInterpretations(inputs, result),
-    [inputs, result],
+    () => generateRetirementInterpretations(inputs, result, currency),
+    [inputs, result, currency],
   );
 
   return { inputs, setInputs: setParams, result, interpretations } as const;

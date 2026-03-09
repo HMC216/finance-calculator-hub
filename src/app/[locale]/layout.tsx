@@ -8,6 +8,7 @@ import Footer from '@/components/layout/Footer.tsx';
 import { routing } from '@/i18n/routing.ts';
 import { isRtl } from '@/i18n/config.ts';
 import type { Locale } from '@/i18n/config.ts';
+import { CurrencyProvider } from '@/lib/currency/CurrencyContext.tsx';
 import '../globals.css';
 
 const inter = Inter({
@@ -50,13 +51,15 @@ export default async function LocaleLayout({
         className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <NuqsAdapter>
-            <div className="flex min-h-screen flex-col bg-gray-50">
-              <Header />
-              <main className="flex-1">{children}</main>
-              <Footer />
-            </div>
-          </NuqsAdapter>
+          <CurrencyProvider>
+            <NuqsAdapter>
+              <div className="flex min-h-screen flex-col bg-gray-50">
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </div>
+            </NuqsAdapter>
+          </CurrencyProvider>
         </NextIntlClientProvider>
       </body>
     </html>
